@@ -1,24 +1,30 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Executing locally
 
-Things you may want to cover:
+### Basic Configuration
 
-* Ruby version
+In `.env.development.local`, enter values for those.
 
-* System dependencies
+```
+HARVEST_ACCESS_TOKEN=
+HARVEST_ACCOUNT_ID=
+```
 
-* Configuration
+Create a development topen [here](https://id.getharvest.com/developers).
 
-* Database creation
+After creating the coken, choose the account you want to monitor. It's *Account
+ID* will appear under it.
 
-* Database initialization
+```
+HARVEST_USER_ID=
+```
 
-* How to run the test suite
+When connected to *Harvest*, click on your name (top-right) and then _My
+Profile_. Your _user ID_ will be displayed in the URL (`/people/12345/edit`).
 
-* Services (job queues, cache servers, search engines, etc.)
+### Start Dev Server
 
-* Deployment instructions
-
-* ...
+```
+bin/dev
+```

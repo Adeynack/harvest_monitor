@@ -18,10 +18,14 @@ table
 h2 Week Summary
 table
   thead
-    th Worked
-    th Billable
+    th Worked to Day
+    th Billable to Day
+    th Worked Total
+    th Billable Total
   tbody
     tr
+      td = render "progress_cell", value: @week_summary[:total_worked], max: @worked_hours_per_day * @worked_days_so_far
+      td = render "progress_cell", value: @week_summary[:total_billable], max: @billable_hours_per_day * @worked_days_so_far
       td = render "progress_cell", value: @week_summary[:total_worked], max: @worked_hours_per_day * @worked_days
       td = render "progress_cell", value: @week_summary[:total_billable], max: @billable_hours_per_day * @worked_days
 
@@ -33,10 +37,13 @@ table
     th Worked
     th Billable
   tbody
-    - (@first_day..@last_day).each do |day|
+    - (@first_day..[@last_day, Date.today].min).each do |day|
       - summary = @daily_summaries[day] || {}
       tr
         td = day
         td = l day, format: "%A"
         td = render "progress_cell", value: summary[:total_worked] || 0, max: @worked_hours_per_day
         td = render "progress_cell", value: summary[:total_billable] || 0, max: @billable_hours_per_day
+
+p
+  a href=@full_url Link to this page with all parameters

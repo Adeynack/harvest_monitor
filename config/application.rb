@@ -17,6 +17,7 @@ module HarvestMonitor
     # in config/environments, which are processed later.
     #
     # config.time_zone = "Central Time (US & Canada)"
+    config.beginning_of_week = :monday
     # config.eager_load_paths << Rails.root.join("extras")
 
     config.template_engine = :slim
