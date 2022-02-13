@@ -1,3 +1,11 @@
 progress value=value max=max class=(value >= max ? "complete" : "incomplete")
 br
 span = human_hours_minutes(value)
+span<> = "/"
+span = human_hours_minutes(max)
+- ratio = value / max
+- icon ||= "👌🏼" if ratio >= 1.20
+- icon ||= "👍🏼" if ratio >= 1.00
+- icon ||= "⚠️" if ratio >= 0.8
+- icon ||= "🚨"
+span< = icon

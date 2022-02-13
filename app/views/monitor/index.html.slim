@@ -22,11 +22,8 @@ table
     th Billable
   tbody
     tr
-      td = render "progress_cell", value:@week_summary[:total_worked], max: (@worked_hours_per_day * @worked_days)
-      td
-        progress value=(@week_summary[:total_billable]) max=(@billable_hours_per_day * @worked_days)
-        br
-        span = human_hours_minutes(@week_summary[:total_billable])
+      td = render "progress_cell", value: @week_summary[:total_worked], max: @worked_hours_per_day * @worked_days
+      td = render "progress_cell", value: @week_summary[:total_billable], max: @billable_hours_per_day * @worked_days
 
 h2 Daily Break Down
 table
@@ -41,11 +38,5 @@ table
       tr
         td = day
         td = l day, format: "%A"
-        td
-          progress value=(summary[:total_worked] || 0) max=@worked_hours_per_day
-          br
-          span = human_hours_minutes(summary[:total_worked] || 0)
-        td
-          progress value=(summary[:total_billable] || 0) max=@billable_hours_per_day
-          br
-          span = human_hours_minutes(summary[:total_billable] || 0)
+        td = render "progress_cell", value: summary[:total_worked] || 0, max: @worked_hours_per_day
+        td = render "progress_cell", value: summary[:total_billable] || 0, max: @billable_hours_per_day
