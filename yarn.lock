@@ -20,6 +20,18 @@
   resolved "https://registry.yarnpkg.com/@hotwired/turbo/-/turbo-7.1.0.tgz#27e44e0e3dc5bd1d4bda0766d579cf5a14091cd7"
   integrity sha512-Q8kGjqwPqER+CtpQudbH+3Zgs2X4zb6pBAlr6NsKTXadg45pAOvxI9i4QpuHbwSzR2+x87HUm+rot9F/Pe8rxA==
 
+"@primer/css@^19.3.0":
+  version "19.3.0"
+  resolved "https://registry.yarnpkg.com/@primer/css/-/css-19.3.0.tgz#46980ddd4292fafe482ed201fb13174bd61ff2db"
+  integrity sha512-8vmesDNX2K+VrVpeRu9vRLEF0o/XYMoLQCexyVV6TxMI0YNOgnGQhO8EsXuwDK49pjKPXBLrFu4FnTo4q3WYcQ==
+  dependencies:
+    "@primer/primitives" "^7.4.0"
+
+"@primer/primitives@^7.4.0":
+  version "7.4.1"
+  resolved "https://registry.yarnpkg.com/@primer/primitives/-/primitives-7.4.1.tgz#5ab1af3b078bb6b7b158ac84a1ae8a07fbdd3f95"
+  integrity sha512-cos7zQ6tgTtbQzF1gymiuQPcccqkHpccQCaahMRdqHqJP7kiG9/lbq+u13UdrAFJ8iJEyORfHXKd+bwhQf4svw==
+
 "@rails/actioncable@^7.0":
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-7.0.1.tgz#8f383b672e142d009f89b725d49b0832d99da74a"

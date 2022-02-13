@@ -1,1 +1,15 @@
 // Entry point for your Sass build
+
+* {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+td, th {
+  text-align: left;
+  vertical-align: top;
+  padding-right: 1em;
+}
+
+progress {
+  height: 20px;
+}

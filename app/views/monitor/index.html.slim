@@ -1,0 +1,51 @@
+h1 Time Monitor
+
+table
+  thead
+    th Name
+    th Email
+    th Week
+    th Starting on
+    th Ending on
+  tbody
+    tr
+      td = [@user.first_name, @user.last_name].join(" ")
+      td = @user.email
+      td = @week_of.cweek
+      td = l @first_day
+      td = l @last_day
+
+h2 Week Summary
+table
+  thead
+    th Worked
+    th Billable
+  tbody
+    tr
+      td = render "progress_cell", value:@week_summary[:total_worked], max: (@worked_hours_per_day * @worked_days)
+      td
+        progress value=(@week_summary[:total_billable]) max=(@billable_hours_per_day * @worked_days)
+        br
+        span = human_hours_minutes(@week_summary[:total_billable])
+
+h2 Daily Break Down
+table
+  thead
+    th Date
+    th Day
+    th Worked
+    th Billable
+  tbody
+    - (@first_day..@last_day).each do |day|
+      - summary = @daily_summaries[day] || {}
+      tr
+        td = day
+        td = l day, format: "%A"
+        td
+          progress value=(summary[:total_worked] || 0) max=@worked_hours_per_day
+          br
+          span = human_hours_minutes(summary[:total_worked] || 0)
+        td
+          progress value=(summary[:total_billable] || 0) max=@billable_hours_per_day
+          br
+          span = human_hours_minutes(summary[:total_billable] || 0)
