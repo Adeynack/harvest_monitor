@@ -8,7 +8,7 @@ class MonitorController < ApplicationController
     @first_day = week_of_dt.beginning_of_week.to_date
     @last_day = week_of_dt.end_of_week.to_date
     @week_of = week_of_dt.to_date
-    @worked_days_so_far = [@worked_days, DateTime.current.mjd - @first_day.mjd].min
+    @worked_days_so_far = [@worked_days, DateTime.current.mjd - @first_day.mjd + 1].min
 
     harvest = HarvestApi.new
     @user = Rails.cache.fetch([:harvest, :me, harvest.user_id], expires_in: 10.minutes) { harvest.me }
