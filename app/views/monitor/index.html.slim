@@ -2,30 +2,36 @@ h1 Time Monitor
 
 table
   thead
-    th Name
-    th Email
     th Week
     th Starting on
     th Ending on
+    th Name
+    th Email
   tbody
     tr
+      td
+        a> title="Previous Week" href=root_path(params: { week_of: @week_of - 1.week }) <
+        = l @first_day
+      td
+        = l @last_day
+        a< title="Next Week" href=root_path(params: { week_of: @week_of + 1.week }) >
       td = [@user.first_name, @user.last_name].join(" ")
       td = @user.email
       td = @week_of.cweek
-      td = l @first_day
-      td = l @last_day
 
 h2 Week Summary
 table
   thead
-    th Worked to Day
-    th Billable to Day
+    - unless @last_day < Date.today
+      th Worked to Day
+      th Billable to Day
     th Worked Total
     th Billable Total
   tbody
     tr
-      td = render "progress_cell", value: @week_summary[:total_worked], max: @worked_hours_per_day * @worked_days_so_far
-      td = render "progress_cell", value: @week_summary[:total_billable], max: @billable_hours_per_day * @worked_days_so_far
+      - unless @last_day < Date.today
+        td = render "progress_cell", value: @week_summary[:total_worked], max: @worked_hours_per_day * @worked_days_so_far
+        td = render "progress_cell", value: @week_summary[:total_billable], max: @billable_hours_per_day * @worked_days_so_far
       td = render "progress_cell", value: @week_summary[:total_worked], max: @worked_hours_per_day * @worked_days
       td = render "progress_cell", value: @week_summary[:total_billable], max: @billable_hours_per_day * @worked_days
 
