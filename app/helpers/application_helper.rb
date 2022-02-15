@@ -4,6 +4,10 @@ module ApplicationHelper
     div_mod.map!(&:-@) if duration_in_hours.negative?
     hours, decimal_minutes = div_mod
     minutes = (60 * decimal_minutes).round
-    [hours, format("%02d", minutes)].join(":")
+
+    hours_part = "#{'-' if duration_in_hours.negative?}#{hours.abs}"
+    minutes_part = format("%02d", minutes)
+
+    [hours_part, minutes_part].join(":")
   end
 end
