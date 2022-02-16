@@ -6,7 +6,8 @@ table
     th Starting on
     th Ending on
     th Name
-    th Email
+    th E-Mail
+    th title="Estimated End of Day" EoD
   tbody
     tr
       td = @week_of.cweek
@@ -18,6 +19,9 @@ table
         a< title="Next Week" href=root_path(params: { week_of: @week_of + 1.week }) >
       td = [@user.first_name, @user.last_name].join(" ")
       td = @user.email
+      td
+        - remaining_for_today = @worked_hours_per_day - @daily_summaries[Date.today][:total_worked]
+        = l (DateTime.current + remaining_for_today.hours), format: "%H:%M"
 
 h2 Week Summary
 table
