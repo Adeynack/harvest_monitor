@@ -11,9 +11,9 @@ HARVEST_ACCESS_TOKEN=
 HARVEST_ACCOUNT_ID=
 ```
 
-Create a development topen [here](https://id.getharvest.com/developers).
+Create a development token [here](https://id.getharvest.com/developers).
 
-After creating the coken, choose the account you want to monitor. It's *Account
+After creating the token, choose the account you want to monitor. It's *Account
 ID* will appear under it.
 
 ```
@@ -25,6 +25,11 @@ Profile_. Your _user ID_ will be displayed in the URL (`/people/12345/edit`).
 
 ### Start Dev Server
 
+If you want to keep it running while working on other Rails projects, specify
+a port:
+
 ```
-bin/dev
+PORT=3001 bin/dev
 ```
+
+And then open [http://localhost:3001](http://localhost:3001).
