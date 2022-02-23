@@ -32,5 +32,7 @@ class MonitorController < ApplicationController
       worked_days: @worked_days,
       week_of: @first_day
     })
+
+    @estimated_end_of_day = DateTime.current + (@worked_hours_per_day - @daily_summaries.dig(Date.today, :total_worked).to_d).hours
   end
 end
