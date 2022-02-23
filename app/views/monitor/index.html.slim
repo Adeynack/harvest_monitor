@@ -20,7 +20,7 @@ table
       td = [@user.first_name, @user.last_name].join(" ")
       td = @user.email
       td
-        - remaining_for_today = @worked_hours_per_day - @daily_summaries[Date.today][:total_worked]
+        - remaining_for_today = @worked_hours_per_day - @daily_summaries.dig(Date.today, :total_worked).to_i
         = l (DateTime.current + remaining_for_today.hours), format: "%H:%M"
 
 h2 Week Summary

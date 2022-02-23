@@ -33,6 +33,7 @@ group :development, :test do
   gem "pry-rescue"
   gem "pry-stack_explorer"
   gem "pry-rails"
+  gem "ruby_jard"
 end
 
 group :development do
