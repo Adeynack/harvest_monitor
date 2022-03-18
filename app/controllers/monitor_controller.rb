@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MonitorController < ApplicationController
   def index
     @worked_hours_per_day = 7.5

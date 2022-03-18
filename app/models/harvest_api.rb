@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class HarvestApi
   def me
     OpenStruct.new(get("users/me"))
   end
 
   def time_entries(from: nil, to: nil)
-    query = { from: from, to: to }.compact
+    query = {from: from, to: to}.compact
     response = get_all("time_entries", query: query) { |r| r["time_entries"] }
     response.map { |e| TimeEntry.new(e) }
   end

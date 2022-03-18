@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TimeEntry
   attr_accessor :spent_date
   attr_accessor :hours
