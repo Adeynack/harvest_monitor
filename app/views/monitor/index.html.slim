@@ -25,18 +25,18 @@ table
 h2 Week Summary
 table
   thead
+    th Worked Total
+    th Billable Total
     - unless @last_day < Date.today
       th Worked to Day
       th Billable to Day
-    th Worked Total
-    th Billable Total
   tbody
     tr
+      td = render "progress_cell", value: @week_summary[:total_worked], max: @worked_hours_per_day * @worked_days
+      td = render "progress_cell", value: @week_summary[:total_billable], max: @billable_hours_per_day * @worked_days
       - unless @last_day < Date.today
         td = render "progress_cell", value: @week_summary[:total_worked], max: @worked_hours_per_day * @worked_days_so_far
         td = render "progress_cell", value: @week_summary[:total_billable], max: @billable_hours_per_day * @worked_days_so_far
-      td = render "progress_cell", value: @week_summary[:total_worked], max: @worked_hours_per_day * @worked_days
-      td = render "progress_cell", value: @week_summary[:total_billable], max: @billable_hours_per_day * @worked_days
 
 h2 Daily Break Down
 table

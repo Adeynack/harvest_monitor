@@ -30,7 +30,7 @@ class MonitorController < ApplicationController
       total_billable: entries_for_this_week.filter(&:billable).map(&:hours).sum
     }
 
-    @estimated_end_of_day = DateTime.current + (@worked_hours_per_day - @daily_summaries.dig(Date.today, :total_worked).to_d).hours
+    @estimated_end_of_day = DateTime.current + (@worked_hours_per_day - @daily_summaries.dig(Date.current, :total_worked).to_d).hours
 
     @reload_seconds = params.fetch(:reload_seconds, "60").to_i
 
