@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class MonitorController < ApplicationController
-  def index
+  def show
     @worked_hours_per_day = 7.5
     @billable_hours_per_day = 6
     @worked_days = params[:worked_days]&.to_i || 5
@@ -32,12 +32,12 @@ class MonitorController < ApplicationController
 
     @estimated_end_of_day = DateTime.current + (@worked_hours_per_day - @daily_summaries.dig(Date.current, :total_worked).to_d).hours
 
-    @reload_seconds = params.fetch(:reload_seconds, "60").to_i
+    @seconds_to_reload = params.fetch(:seconds_to_reload, "60").to_i
 
     @full_url = root_path(params: {
       worked_days: @worked_days,
       week_of: @first_day,
-      reload_seconds: @reload_seconds
+      seconds_to_reload: @seconds_to_reload,
     })
   end
 end

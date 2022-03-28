@@ -57,6 +57,6 @@ table
 p
   a href=@full_url Link to this page with all parameters
 
-- if @reload_seconds > 0
+- if @seconds_to_reload > 0
   javascript:
-    setTimeout(() => location.reload(), #{@reload_seconds * 1000});
+    setTimeout(() => location.reload(), #{@seconds_to_reload * 1000});
