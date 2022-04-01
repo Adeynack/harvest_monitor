@@ -26,6 +26,7 @@ gem "dotenv-rails"
 gem "httparty"
 gem "amazing_print"
 gem "table_print"
+gem "avo"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

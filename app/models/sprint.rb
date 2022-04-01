@@ -16,6 +16,22 @@ class Sprint < ApplicationRecord
     (during.to_a - weekdays_not_worked).filter(&:on_weekday?)
   end
 
+  def during_from
+    during&.min
+  end
+
+  def during_from=(from)
+    self.during = from.to_date..during_to
+  end
+
+  def during_to
+    during&.max
+  end
+
+  def during_to=(to)
+    self.during = during_from..to.to_date
+  end
+
   class << self
     def find_for_date(date)
       find_by("during @> ?::date", date)
