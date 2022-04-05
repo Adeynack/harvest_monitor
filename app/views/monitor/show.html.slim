@@ -11,13 +11,15 @@ h1 Time Monitor
       th title="Estimated End of Day" EoD
     tbody
       tr
-        td = @sprint.name
         td
-          a> title="Previous Sprint" href=root_path(params: { sprint_of: @sprint.during.min - 1.day }) <
+          a href=(avo.resources_sprint_path(@sprint))
+            = @sprint.name
+        td
+          a> title="Previous Sprint" href=root_path(params: { sprint_of: @first_day - 1.day }) <
           = l @first_day
         td
           = l @last_day
-          a< title="Next Sprint" href=root_path(params: { sprint_of: @sprint.during.max + 1.day }) >
+          a< title="Next Sprint" href=root_path(params: { sprint_of: @last_day + 1.day }) >
         td = [@user.first_name, @user.last_name].join(" ")
         td = @user.email
         td
@@ -68,8 +70,9 @@ h1 Time Monitor
 
 - else
   p
-    span No sprint found for date
-    span< = @sprint_for
-    span . Go to
-    a< href="/" actual date
-    span .
+    span = "No sprint found for date #{@sprint_of}."
+  p
+    a href="/" Go to actual date.
+  p
+    a href=avo.new_resources_sprint_path
+      span Create the next sprint.

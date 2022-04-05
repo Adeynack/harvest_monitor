@@ -10,17 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_28_070233) do
+ActiveRecord::Schema.define(version: 2022_04_05_090000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "sprints", force: :cascade do |t|
     t.string "name", null: false
-    t.daterange "during", null: false
-    t.date "weekdays_not_worked", default: [], null: false, array: true
+    t.date "during_from", null: false
+    t.date "during_to", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "unworked_days", force: :cascade do |t|
+    t.date "day", null: false
+    t.string "reason"
   end
 
 end

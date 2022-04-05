@@ -9,8 +9,8 @@ class MonitorController < ApplicationController
     @sprint = Sprint.find_for_date(@sprint_of)
     return unless @sprint
 
-    @first_day = @sprint.during.min
-    @last_day = @sprint.during.max
+    @first_day = @sprint.during_from
+    @last_day = @sprint.during_to
 
     @worked_days = @sprint.worked_days
     @worked_days_count = @worked_days.size
@@ -19,7 +19,7 @@ class MonitorController < ApplicationController
     harvest = HarvestApi.new
     @user = Rails.cache.fetch([:harvest, :me, harvest.user_id], expires_in: 10.minutes) { harvest.me }
     entries_for_this_week = Rails.cache.fetch([:harvest, :time_entries, harvest.user_id], expires_in: 5.minutes) do
-      harvest.time_entries(from: @sprint.during.min, to: @sprint.during.max)
+      harvest.time_entries(from: @first_day, to: @last_day)
     end
 
     @daily_summaries = entries_for_this_week.group_by(&:spent_date).transform_values do |entries|
@@ -39,7 +39,7 @@ class MonitorController < ApplicationController
     @seconds_to_reload = params.fetch(:seconds_to_reload, "60").to_i
 
     @full_url = root_path(params: {
-      sprint_of: @sprint.during.min,
+      sprint_of: @first_day,
       seconds_to_reload: @seconds_to_reload
     })
   end
