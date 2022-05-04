@@ -1,78 +1,11 @@
 h1 Time Monitor
-
 - if @sprint
-  table
-    thead
-      th Sprint
-      th Starting on
-      th Ending on
-      th Name
-      th E-Mail
-      th title="Estimated End of Day" EoD
-    tbody
-      tr
-        td
-          a href=(avo.resources_sprint_path(@sprint))
-            = @sprint.name
-        td
-          a> title="Previous Sprint" href=root_path(params: { sprint_of: @first_day - 1.day }) <
-          = l @first_day
-        td
-          = l @last_day
-          a< title="Next Sprint" href=root_path(params: { sprint_of: @last_day + 1.day }) >
-        td = [@user.first_name, @user.last_name].join(" ")
-        td = @user.email
-        td
-          = l @estimated_end_of_day, format: "%H:%M"
-
-  h2 Sprint Summary
-  table
-    thead
-      th Worked Total
-      th Billable Total
-      - unless @last_day < Date.today
-        th Worked to Day
-        th Billable to Day
-    tbody
-      tr
-        td = render "progress_cell", value: @sprint_summary[:total_worked], max: @worked_hours_per_day * @worked_days_count
-        td = render "progress_cell", value: @sprint_summary[:total_billable], max: @billable_hours_per_day * @worked_days_count
-        - unless @last_day < Date.today
-          td = render "progress_cell", value: @sprint_summary[:total_worked], max: @worked_hours_per_day * @worked_days_so_far
-          td = render "progress_cell", value: @sprint_summary[:total_billable], max: @billable_hours_per_day * @worked_days_so_far
-
-  h2 Daily Break Down
-  table
-    thead
-      th Date
-      th Day
-      th Worked
-      th Billable
-    tbody
-      - (@first_day..[@last_day, Date.today].min).reverse_each do |day|
-        - summary = @daily_summaries[day] || {}
-        - day_is_worked = @worked_days.include?(day)
-        tr style="color: #{day_is_worked ? 'black' : 'gray'};"
-          td = day
-          td = l day, format: "%A"
-          td = render "progress_cell", value: summary[:total_worked] || 0, max: day_is_worked ? @worked_hours_per_day : 0
-          td = render "progress_cell", value: summary[:total_billable] || 0, max: day_is_worked ? @billable_hours_per_day : 0
-
-  span
-    a href=@full_url Link to this page with all parameters
-  span<> |
-  span
-    a href="/" Go to current sprint
-
-  - if @seconds_to_reload > 0
-    javascript:
-      setTimeout(() => location.reload(), #{@seconds_to_reload * 1000});
-
+  = render "sprint_info", sprint: @sprint, harvest_error: @harvest_error
+  - if @harvest_error
+    = render "harvest_error", harvest_error: @harvest_error
+  - else
+    = render "sprint_summary", sprint: @sprint
+    = render "daily_breakdown", sprint: @sprint
+  = render "bottom_links_and_auto_reload", full_url: @full_url, seconds_to_reload: @seconds_to_reload
 - else
-  p
-    span = "No sprint found for date #{@sprint_of}."
-  p
-    a href="/" Go to actual date.
-  p
-    a href=avo.new_resources_sprint_path
-      span Create the next sprint.
+  = render "no_sprint", sprint_of: @sprint_of

@@ -1,0 +1,16 @@
+h2 Daily Break Down
+table
+  thead
+    th Date
+    th Day
+    th Worked
+    th Billable
+  tbody
+    - (@first_day..[@last_day, Date.today].min).reverse_each do |day|
+      - summary = @daily_summaries[day] || {}
+      - day_is_worked = @worked_days.include?(day)
+      tr style="color: #{day_is_worked ? 'black' : 'gray'};"
+        td = day
+        td = l day, format: "%A"
+        td = render "progress_cell", value: summary[:total_worked] || 0, max: day_is_worked ? @worked_hours_per_day : 0
+        td = render "progress_cell", value: summary[:total_billable] || 0, max: day_is_worked ? @billable_hours_per_day : 0

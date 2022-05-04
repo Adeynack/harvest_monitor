@@ -1,0 +1,9 @@
+span
+  a href=@full_url Link to this page with all parameters
+span<> |
+span
+  a href="/" Go to current sprint
+
+- if @seconds_to_reload > 0
+  javascript:
+    setTimeout(() => location.reload(), #{@seconds_to_reload * 1000});

@@ -1,0 +1,25 @@
+table
+  thead
+    th Sprint
+    th Starting on
+    th Ending on
+    - unless @harvest_error
+      th Name
+      th E-Mail
+      th title="Estimated End of Day" EoD
+  tbody
+    tr
+      td
+        a href=(avo.resources_sprint_path(@sprint))
+          = @sprint.name
+      td
+        a> title="Previous Sprint" href=root_path(params: { sprint_of: @first_day - 1.day }) <
+        = l @first_day
+      td
+        = l @last_day
+        a< title="Next Sprint" href=root_path(params: { sprint_of: @last_day + 1.day }) >
+      - unless @harvest_error
+        td = [@user.first_name, @user.last_name].join(" ")
+        td = @user.email
+        td
+          = l @estimated_end_of_day, format: "%H:%M"
