@@ -4,12 +4,14 @@
 #
 # Table name: sprints
 #
-#  id          :bigint           not null, primary key
-#  name        :string           not null
-#  during_from :date             not null
-#  during_to   :date             not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id                :bigint           not null, primary key
+#  name              :string           not null
+#  during_from       :date             not null
+#  during_to         :date             not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  handicap_worked   :float            default(0.0), not null
+#  handicap_billable :float            default(0.0), not null
 #
 class Sprint < ApplicationRecord
   def days

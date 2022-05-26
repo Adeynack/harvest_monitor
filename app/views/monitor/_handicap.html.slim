@@ -1,0 +1,5 @@
+- parts = []
+- parts.push("#{human_hours_minutes(@sprint.handicap_worked)} worked hours") unless @sprint.handicap_worked.zero?
+- parts.push("#{human_hours_minutes(@sprint.handicap_billable)} billable hours") unless @sprint.handicap_billable.zero?
+- if parts.present?
+  p = "Including #{parts.join(' and ')} handicap."

@@ -36,8 +36,8 @@ class MonitorController < ApplicationController
       end
 
       @sprint_summary = {
-        total_worked: entries_for_this_week.map(&:hours).sum,
-        total_billable: entries_for_this_week.filter(&:billable).map(&:hours).sum
+        total_worked: entries_for_this_week.map(&:hours).sum + @sprint.handicap_worked,
+        total_billable: entries_for_this_week.filter(&:billable).map(&:hours).sum + @sprint.handicap_billable
       }
 
       @estimated_end_of_day = DateTime.current + (@worked_hours_per_day - @daily_summaries.dig(Date.current, :total_worked).to_d).hours
