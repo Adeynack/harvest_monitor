@@ -23,7 +23,7 @@ class MonitorController < ApplicationController
       entries_for_this_week = Rails.cache.fetch([:harvest, :time_entries, harvest.user_id], expires_in: 5.minutes) do
         harvest.time_entries(from: @first_day, to: @last_day)
       end
-    rescue StandardError => e
+    rescue => e
       @harvest_error = e
     end
 
@@ -41,6 +41,7 @@ class MonitorController < ApplicationController
       }
 
       @estimated_end_of_day = DateTime.current + (@worked_hours_per_day - @daily_summaries.dig(Date.current, :total_worked).to_d).hours
+      @estimated_end_of_day_to_day = DateTime.current + (@worked_hours_per_day * @worked_days_so_far - @sprint_summary[:total_worked]).hours
     end
 
     @seconds_to_reload = params.fetch(:seconds_to_reload, "60").to_i

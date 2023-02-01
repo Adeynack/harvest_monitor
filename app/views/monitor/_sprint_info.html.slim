@@ -22,4 +22,7 @@ table
         td = [@user.first_name, @user.last_name].join(" ")
         td = @user.email
         td
-          = l @estimated_end_of_day, format: "%H:%M"
+          span = l @estimated_end_of_day, format: "%H:%M"
+          span< = "("
+          span = l @estimated_end_of_day_to_day, format: "%H:%M"
+          span )

@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_04_123118) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_10_18_084601) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,8 +18,8 @@ ActiveRecord::Schema.define(version: 2022_05_04_123118) do
     t.string "name", null: false
     t.date "during_from", null: false
     t.date "during_to", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.float "handicap_worked", default: 0.0, null: false
     t.float "handicap_billable", default: 0.0, null: false
   end
@@ -28,6 +27,7 @@ ActiveRecord::Schema.define(version: 2022_05_04_123118) do
   create_table "unworked_days", force: :cascade do |t|
     t.date "day", null: false
     t.string "reason"
+    t.index ["day"], name: "index_unworked_days_on_day", unique: true
   end
 
 end
